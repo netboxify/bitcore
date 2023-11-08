@@ -1,7 +1,9 @@
 # Bitcore Monorepo
 
-  Max Node version: v18.18.2
-  Max NPM version: 9.8.1
+  Max Node version (we found working): v20.9.0
+  Max NPM version (we found working): 10.1.0
+
+  Make sure to create bitcore.config.json (or other name and specify that other path in .env)
 
   <p align="center">
   <img alt="npm" src="https://img.shields.io/npm/v/bitcore-lib">
