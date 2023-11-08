@@ -1,5 +1,8 @@
 # Bitcore Monorepo
 
+  Max Node version: v18.18.2
+  Max NPM version: 9.8.1
+
   <p align="center">
   <img alt="npm" src="https://img.shields.io/npm/v/bitcore-lib">
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/bitpay/bitcore">
