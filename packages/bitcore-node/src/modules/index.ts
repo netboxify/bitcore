@@ -53,6 +53,7 @@ class ModuleManager extends BaseModule {
     MATIC: './matic',
     BCH: './bitcoin-cash',
     DOGE: './dogecoin',
+    DASH: './dash',
     LTC: './litecoin',
     XRP: './ripple'
   };

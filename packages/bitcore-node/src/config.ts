@@ -1,3 +1,6 @@
+import dotenv from "dotenv"
+dotenv.config()
+
 import * as _ from 'lodash';
 import { cpus, homedir } from 'os';
 import { ConfigType } from './types/Config';
