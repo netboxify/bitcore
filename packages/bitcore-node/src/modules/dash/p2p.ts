@@ -40,7 +40,7 @@ export class DashP2PWorker extends BaseP2PWorker<IBtcBlock> {
       [this.bitcoreP2p.Inventory.TYPE.TX]: 100000
     };
     this.messages = new this.bitcoreP2p.Messages({
-      protocolVersion: 70215,//70215,
+      protocolVersion: 70215,
       network: this.bitcoreLib.Networks.get(this.network),
       Block: this.bitcoreLib.Block,
       Transaction: this.bitcoreLib.Transaction,
