@@ -5,6 +5,48 @@
 
   Make sure to create bitcore.config.json (or other name and specify that other path in .env)
 
+  Create .env inside of packages/bitcore-node
+
+  ```
+    BITCORE_CONFIG_PATH=/home/node/bitcore/bitcore-custom.config.js
+
+    MONGO_DB_USERNAME=
+    MONGO_DB_PASSWORD=
+    MONGO_DB_HOST=
+    MONGO_DB_PORT=
+    MONGO_DB_NAME=
+
+    BTC_NODE_USERNAME=
+    BTC_NODE_PASSWORD=
+    BTC_NODE_HOST=127.0.0.1
+    BTC_NODE_PORT=
+    BTC_NODE_RPC_PORT=
+
+    BCH_NODE_USERNAME=
+    BCH_NODE_PASSWORD=
+    BCH_NODE_HOST=127.0.0.1
+    BCH_NODE_PORT=
+    BCH_NODE_RPC_PORT=
+
+    LTC_NODE_USERNAME=
+    LTC_NODE_PASSWORD=
+    LTC_NODE_HOST=127.0.0.1
+    LTC_NODE_PORT=
+    LTC_NODE_RPC_PORT=
+
+    DASH_NODE_USERNAME=
+    DASH_NODE_PASSWORD=
+    DASH_NODE_HOST=127.0.0.1
+    DASH_NODE_PORT=
+    DASH_NODE_RPC_PORT=
+
+    DOGE_NODE_USERNAME=
+    DOGE_NODE_PASSWORD=
+    DOGE_NODE_HOST=127.0.0.1
+    DOGE_NODE_PORT=
+    DOGE_NODE_RPC_PORT=
+  ```
+
   <p align="center">
   <img alt="npm" src="https://img.shields.io/npm/v/bitcore-lib">
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/bitpay/bitcore">
