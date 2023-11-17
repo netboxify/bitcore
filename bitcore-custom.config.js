@@ -100,7 +100,7 @@ module.exports = {
           "rpc": {
             "host": process.env["DASH_NODE_HOST"],
             "port": process.env["DASH_NODE_RPC_PORT"],
-            "username": process.env["DASH_NODE_PASSWORD"],
+            "username": process.env["DASH_NODE_USERNAME"],
             "password": process.env["DASH_NODE_PASSWORD"]
           }
         }

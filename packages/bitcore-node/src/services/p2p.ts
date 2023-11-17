@@ -28,7 +28,8 @@ export class P2pManager {
   async stop() {
     logger.info('Stopping P2P Manager');
     for (const worker of this.workers) {
-      await worker.stop();
+	    console.log('Stopping ', worker.getChain())
+      worker.stop();
     }
     this.workers = [];
   }
@@ -74,6 +75,10 @@ export class BaseP2PWorker<T extends IBlock = IBlock> {
   async start(): Promise<any> {}
   async stop(): Promise<any> {}
   async sync(): Promise<any> {}
+
+  getChain(): string {
+  	return this.chain
+  }
 
   getIsSyncingNode(): boolean {
     if (!this.lastHeartBeat) {
