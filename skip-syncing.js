@@ -17,35 +17,35 @@ module.exports = {
       port: process.env['LTC_NODE_RPC_PORT'],
       username: process.env['LTC_NODE_USERNAME'],
       password: process.env['LTC_NODE_PASSWORD'],
-      syncFromBlockHeight: 2580135
+      syncFromBlockHeight: 2583220
     },
     BTC: {
       host: process.env['BTC_NODE_HOST'],
       port: process.env['BTC_NODE_RPC_PORT'],
       username: process.env['BTC_NODE_USERNAME'],
       password: process.env['BTC_NODE_PASSWORD'],
-      syncFromBlockHeight: 816038
+      syncFromBlockHeight: 817602
     },
     BCH: {
       host: process.env['BCH_NODE_HOST'],
       port: process.env['BCH_NODE_RPC_PORT'],
       username: process.env['BCH_NODE_USERNAME'],
       password: process.env['BCH_NODE_PASSWORD'],
-      syncFromBlockHeight: 818670
+      syncFromBlockHeight: 819112
     },
     DOGE: {
       host: process.env['DOGE_NODE_HOST'],
       port: process.env['DOGE_NODE_RPC_PORT'],
       username: process.env['DOGE_NODE_USERNAME'],
       password: process.env['DOGE_NODE_PASSWORD'],
-      syncFromBlockHeight: 4967220
+      syncFromBlockHeight: 4973094
     },
     DASH: {
       host: process.env['DASH_NODE_HOST'],
       port: process.env['DASH_NODE_RPC_PORT'],
       username: process.env['DASH_NODE_USERNAME'],
       password: process.env['DASH_NODE_PASSWORD'],
-      syncFromBlockHeight: 1972752
+      syncFromBlockHeight: 1974324
     }
   }
 };

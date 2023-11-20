@@ -1,6 +1,6 @@
 import * as http from 'http';
 import { ObjectID } from 'mongodb';
-import SocketIO = require('socket.io');
+import { Server as SocketServer } from 'socket.io';
 import { LoggifyClass } from '../decorators/Loggify';
 import logger from '../logger';
 import { CoinEvent, EventModel, EventStorage, TxEvent } from '../models/events';
@@ -10,6 +10,7 @@ import { ConfigType } from '../types/Config';
 import { Auth, VerificationPayload } from '../utils/auth';
 import { Config, ConfigService } from './config';
 import { Event, EventService } from './event';
+import { ChainStateProvider } from '../providers/chain-state';
 
 function SanitizeWallet(x: { wallets?: ObjectID[] }) {
   const sanitized: any = Object.assign({}, x, { wallets: new Array<ObjectID>() });
@@ -19,10 +20,19 @@ function SanitizeWallet(x: { wallets?: ObjectID[] }) {
   return sanitized;
 }
 
+async function AssignCoins(tx: TxEvent) {
+  const chain = tx.chain.toUpperCase();
+  const network = tx.network.toLowerCase();
+  const txid = tx.txid;
+  let coins: any = await ChainStateProvider.getCoinsForTx({ chain, network, txid });
+
+  return Object.assign({}, tx, { inputs: coins.inputs, outputs: coins.outputs });
+}
+
 @LoggifyClass
 export class SocketService {
   httpServer?: http.Server;
-  io?: SocketIO.Server;
+  io?: SocketServer;
   id: number = Math.random();
   configService: ConfigService;
   serviceConfig: ConfigType['services']['socket'];
@@ -61,7 +71,7 @@ export class SocketService {
       this.stopped = false;
       logger.info('Starting Socket Service');
       this.httpServer = server;
-      this.io = SocketIO(server);
+      this.io = new SocketServer(server);
       this.io.sockets.on('connection', socket => {
         socket.on('room', (room: string, payload: VerificationPayload) => {
           const chainNetwork = room.slice(0, room.lastIndexOf('/') + 1);
@@ -103,7 +113,8 @@ export class SocketService {
       if (!this.stopped && this.io) {
         const { chain, network } = tx;
         const sanitizedTx = SanitizeWallet(tx);
-        this.io.sockets.in(`/${chain}/${network}/inv`).emit('tx', sanitizedTx);
+        const finalTx = await AssignCoins(sanitizedTx);
+        this.io.sockets.in(`/${chain}/${network}/inv`).emit('tx', finalTx);
 
         if (tx.wallets && tx.wallets.length) {
           const objectIds = tx.wallets.map(w => new ObjectID(w));
@@ -112,7 +123,7 @@ export class SocketService {
             this.io.sockets.in(`/${chain}/${network}/wallets`).emit('tx', { pubKey: wallet.pubKey, tx });
             this.io.sockets
               .in(`/${chain}/${network}/${wallet.pubKey}`)
-              .emit('tx', { pubKey: wallet.pubKey, tx: sanitizedTx });
+              .emit('tx', { pubKey: wallet.pubKey, tx: finalTx });
           }
         }
       }

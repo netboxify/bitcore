@@ -63,8 +63,8 @@ const makeRPCCall = async (chain, method, params = []) => {
   try {
     return JSON.parse(data).result;
   } catch (e) {
-	  console.log(response)
-	  throw new Error(response)
+    console.log(response);
+    throw new Error(response);
     console.log(chain, 'Error fetching', method, 'for params', params);
   }
 };
@@ -87,24 +87,28 @@ async function fetchBlocks(chain) {
 
     const block = await makeRPCCall(chain, 'getblock', [hash]);
 
-    blocks.push({
-      chain,
-      hash: block.hash,
-      network: 'mainnet',
-      bits: block.bits,
-      height: block.height,
-      merkleRoot: block.merkleroot,
-      nextBlockHash: block.nextblockhash,
-      nonce: block.nonce,
-      previousBlockHash: block.previousblockhash,
-      processed: true,
-      reward: 1000,
-      size: block.size,
-      time: new Date(block.time * 1000),
-      timeNormalized: new Date(block.mediantime * 1000),
-      transactionCount: block.nTx,
-      version: block.version
-    });
+    if (block) {
+      blocks.push({
+        chain,
+        hash: block.hash,
+        network: 'mainnet',
+        bits: block.bits,
+        height: block.height,
+        merkleRoot: block.merkleroot,
+        nextBlockHash: block.nextblockhash,
+        nonce: block.nonce,
+        previousBlockHash: block.previousblockhash,
+        processed: true,
+        reward: 1000,
+        size: block.size,
+        time: new Date(block.time * 1000),
+        timeNormalized: new Date(block.mediantime * 1000),
+        transactionCount: block.nTx,
+        version: block.version
+      });
+    } else {
+      console.log('Block not found for hash', hash);
+    }
   }
 
   return blocks;
